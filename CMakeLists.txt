@@ -8,11 +8,13 @@ endif()
 
 # Compile options
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14 -Wall -Wno-deprecated-declarations -O3")
+
 # set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14 -Wall -Wno-deprecated-declarations") # without optimization
 # set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14 -Wall -O3 -fno-math-errno -fno-trapping-math -DNDEBUG -Wno-deprecated-declarations") # previously used
 
 # To use a pre-processed map (DECOMP_OLD=FALSE) or not (DECOMP_OLD=TRUE)
-set(DECOMP_OLD FALSE)
+set(DECOMP_OLD TRUE)
+
 if(DECOMP_OLD)
   add_definitions(-DDECOMP_OLD)
 endif()
@@ -25,14 +27,13 @@ find_package(catkin REQUIRED)
 find_package(Eigen3 REQUIRED)
 
 find_package(catkin REQUIRED COMPONENTS
-  mpc_tools
+  ros_tools
 )
 
 # Define the current package
 catkin_package(
-  CATKIN_DEPENDS mpc_tools
-  INCLUDE_DIRS include
-               ${EIGEN3_INCLUDE_DIRS}
+  CATKIN_DEPENDS ros_tools
+  INCLUDE_DIRS include ${EIGEN3_INCLUDE_DIRS}
   LIBRARIES ${PROJECT_NAME}
 )
 
